@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Concurrent;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,7 +40,7 @@ namespace GameBackend
             /// <summary>
             /// The elements of text in this group. 
             /// </summary>
-            public List<string> Elements { get; set; } = new List<string>();
+            public ObservableCollection<string> Elements { get; set; } = new ObservableCollection<string>();
 
             #endregion
 
@@ -64,7 +65,7 @@ namespace GameBackend
                             {
                                 using (SQLiteCommand command = new SQLiteCommand("", connection, transaction))
                                 {
-                                    command.CommandText = string.Format("INSERT INTO `{0}` `ID`,`Elements` VALUES (@ID,@Elements)", _tableName);
+                                    command.CommandText = string.Format("INSERT INTO `{0}` (`ID`,`Elements`) VALUES (@ID,@Elements)", _tableName);
 
                                     command.Parameters.AddWithValue("@ID", this.ID);
                                     command.Parameters.AddWithValue("@Elements", this.Elements.Serialize());
@@ -217,7 +218,7 @@ namespace GameBackend
 
                                 return new DialogueGroup
                                 {
-                                    Elements = (reader["Elements"] as string).Deserialize<List<string>>(),
+                                    Elements = new ObservableCollection<string>((reader["Elements"] as string).Deserialize<List<string>>()),
                                     ID = reader["ID"] as string
                                 };
                             }
@@ -257,6 +258,22 @@ namespace GameBackend
         }
 
         /// <summary>
+        /// Gets all IDs from the dialogue groups cache.
+        /// </summary>
+        /// <returns></returns>
+        public static List<string> GetAllIDs()
+        {
+            try
+            {
+                return _dialogueGroupsCache.Keys.ToList();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        /// <summary>
         /// Initializes the dialogue groups cache by clearing it and then loading all elements from the database into it.
         /// </summary>
         /// <returns></returns>
@@ -283,7 +300,7 @@ namespace GameBackend
 
                                     DialogueGroup group = new DialogueGroup
                                     {
-                                        Elements = (reader["Elements"] as string).Deserialize<List<string>>(),
+                                        Elements = new ObservableCollection<string>((reader["Elements"] as string).Deserialize<List<string>>()),
                                         ID = reader["ID"] as string
                                     };
 

@@ -34,12 +34,87 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition />
-                <RowDefinition />
+                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Button Name="Button_FindDatabase" Content="Choose Database" Click="Button_FindDatabase_Click" />
             <TextBox Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding DatabaseLocation}" />
             <TextBlock Name="TextBlock_DatabaseStatus" Grid.Row="1" Grid.ColumnSpan="4" MinHeight="18" Background="Red" TextAlignment="Center" Text="Database Invalid" />
+            <Grid Grid.Row="2" Grid.ColumnSpan="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="9*" />
+                        <RowDefinition Height="1*" MaxHeight="40" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Text="Dialogue Groups" TextAlignment="Center" VerticalAlignment="Center" />
+                    <ListBox Name="ListBox_DialogueGroups" Grid.Row="1" HorizontalContentAlignment="Stretch" SelectionChanged="ListBox_DialogueGroups_SelectionChanged" ItemsSource="{Binding DialogueGroupIDs, Mode=OneWay}">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="6*" />
+                                        <ColumnDefinition Width="1*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding}" TextWrapping="Wrap" />
+                                    <Button Name="Button_DeleteDialogueGroup" Grid.Column="1" Content="-" Click="Button_DeleteDialogueGroup_Click" />
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="6*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox Name="TextBox_NewDialogueItem" Text="{Binding NewDialogueItem}">
+                            <TextBox.Resources>
+                                <Storyboard Name="Storyboard_NewDialogueGroupFlash" x:Key="Storyboard_NewDialogueGroupFlash" Duration="00:00:00.5" AutoReverse="True" Storyboard.TargetProperty="(TextBox.Background).(SolidColorBrush.Color)" Storyboard.TargetName="TextBox_NewDialogueItem">
+                                    <ColorAnimation From="White" To="Red">
+                                    </ColorAnimation>
+                                </Storyboard>
+                            </TextBox.Resources>
+                        </TextBox>
+                        <Button Name="Button_AddNewDialogueGroupItem" Grid.Column="1" Content="+" Click="Button_AddNewDialogueGroupItem_Click" />
+                    </Grid>
+                </Grid>
+                <Grid Grid.Column="1" Grid.ColumnSpan="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="8*" />
+                        <RowDefinition Height="3*" />
+                    </Grid.RowDefinitions>
+                    <TextBlock TextAlignment="Center" VerticalAlignment="Center" Text="Elements" />
+                    <ListBox Name="ListBox_DialogueElements" ScrollViewer.CanContentScroll="False" ScrollViewer.VerticalScrollBarVisibility="Auto" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.Row="1"
+                             ItemsSource="{Binding SelectedDialogueGroup.Elements}" HorizontalContentAlignment="Stretch">
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="6*" />
+                                        <ColumnDefinition Width="1*" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock Text="{Binding}" TextWrapping="Wrap" />
+                                    <Button Name="Button_DeleteDialogueElement" Grid.Column="1" Content="-" Click="Button_DeleteDialogueElement_Click" />
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                    <Grid Grid.Row="2">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="6*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+                        <TextBox Name="TextBox_NewDialogueElement" AcceptsReturn="True" TextWrapping="Wrap" ScrollViewer.CanContentScroll="True" ScrollViewer.VerticalScrollBarVisibility="Auto" />
+                        <Button Name="Button_AddNewDialogueElement" Grid.Column="1" Content="+" Click="Button_AddNewDialogueElement_Click" />
+                    </Grid>
+
+                </Grid>
+            </Grid>
 
 
         </Grid>
