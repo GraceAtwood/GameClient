@@ -32,13 +32,14 @@
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition />
-                <RowDefinition />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <Button Name="Button_FindDatabase" Content="Choose Database" />
+            <Button Name="Button_FindDatabase" Content="Choose Database" Click="Button_FindDatabase_Click" />
             <TextBox Grid.Column="1" Grid.ColumnSpan="3" Text="{Binding DatabaseLocation}" />
+            <TextBlock Name="TextBlock_DatabaseStatus" Grid.Row="1" Grid.ColumnSpan="4" MinHeight="18" Background="Red" TextAlignment="Center" Text="Database Invalid" />
 
 
         </Grid>
