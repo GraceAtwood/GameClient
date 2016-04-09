@@ -97,7 +97,7 @@ namespace GameBackend
                                 while (await reader.ReadAsync())
                                 {
                                     if (!_dialogueCache.TryAdd(reader.GetInt32(reader.GetOrdinal("ID")), reader["Text"] as string))
-                                        throw new Exception(string.Format("There was an error while attempting to load the line", ));
+                                        throw new Exception("There was an error while attempting to load a line.");
                                 }
                             }
                         }
