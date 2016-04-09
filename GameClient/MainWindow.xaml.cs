@@ -24,5 +24,12 @@ namespace GameClient
         {
             InitializeComponent();
         }
+
+        private async void Button_FindDatabase_Click(object sender, RoutedEventArgs e)
+        {
+            Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
+            dialog.ShowDialog();
+            MessageBox.Show((await GameBackend.Diagnostics.TestDatabaseConnectionAsync(dialog.FileName)).ToString());
+        }
     }
 }
