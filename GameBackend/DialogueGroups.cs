@@ -188,6 +188,8 @@ namespace GameBackend
 
         }
 
+        #region Static Data Access Methods
+
         /// <summary>
         /// Asynchronously loads a dialogue group for a given ID from the database or throws an error if no line is found.
         /// </summary>
@@ -222,7 +224,7 @@ namespace GameBackend
                             else
                             {
                                 throw new Exception(string.Format("No dialogue group exists for the group ID '{0}'!", groupID));
-                            } 
+                            }
                         }
 
                     }
@@ -298,6 +300,8 @@ namespace GameBackend
                 throw;
             }
         }
+
+        #endregion
 
     }
 }
