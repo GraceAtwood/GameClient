@@ -31,5 +31,10 @@ namespace GameClient
             dialog.ShowDialog();
             MessageBox.Show((await GameBackend.Diagnostics.TestDatabaseConnectionAsync(dialog.FileName)).ToString());
         }
+
+        private void Button_Settings_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

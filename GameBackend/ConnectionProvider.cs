@@ -10,12 +10,12 @@ namespace GameBackend
     /// <summary>
     /// Provides connections from the SQLite connection pool.
     /// </summary>
-    internal static class ConnectionProvider
+    public static class ConnectionProvider
     {
         /// <summary>
         /// The location of the application's database.
         /// </summary>
-        internal static string DatabaseLocation { get; set; } = null;
+        public static string DatabaseLocation { get; set; } = null;
 
         /// <summary>
         /// Creates a new SQLite connection given a database location.
