@@ -26,6 +26,11 @@ namespace GameBackend
                 using (SQLiteConnection connection = ConnectionProvider.GetConnection(databaseLocation))
                 {
                     await connection.OpenAsync();
+
+                    using (SQLiteTransaction transaction = connection.BeginTransaction())
+                    {
+                        transaction.Rollback();
+                    }
                 }
 
                 //If we get here, then the connection opened successfully!
