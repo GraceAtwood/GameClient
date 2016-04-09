@@ -7,6 +7,9 @@ using System.Data.SQLite;
 
 namespace GameBackend
 {
+    /// <summary>
+    /// Provides methods for interacting with the backend to determine its health and other connection stats.
+    /// </summary>
     public static class Diagnostics
     {
         /// <summary>

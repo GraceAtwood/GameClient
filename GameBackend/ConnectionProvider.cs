@@ -7,13 +7,33 @@ using System.Data.SQLite;
 
 namespace GameBackend
 {
-    public static class ConnectionProvider
+    /// <summary>
+    /// Provides connections from the SQLite connection pool.
+    /// </summary>
+    internal static class ConnectionProvider
     {
-        public static string DatabaseLocation { get; set; } = null;
+        /// <summary>
+        /// The location of the application's database.
+        /// </summary>
+        internal static string DatabaseLocation { get; set; } = null;
 
-        public static SQLiteConnection GetConnection(string databaseLocation)
+        /// <summary>
+        /// Creates a new SQLite connection given a database location.
+        /// </summary>
+        /// <param name="databaseLocation"></param>
+        /// <returns></returns>
+        internal static SQLiteConnection GetConnection(string databaseLocation)
         {
             return new SQLiteConnection(string.Format("Data Source={0}", databaseLocation));
+        }
+
+        /// <summary>
+        /// Creates a new SQLite connection and assumes the DatabaseLocation as the location.
+        /// </summary>
+        /// <returns></returns>
+        internal static SQLiteConnection GetConnection()
+        {
+            return new SQLiteConnection(string.Format("Data Source={0}", DatabaseLocation));
         }
     }
 }

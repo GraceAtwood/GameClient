@@ -66,6 +66,7 @@
   <ItemGroup>
     <Compile Include="Diagnostics.cs" />
     <Compile Include="ConnectionProvider.cs" />
+    <Compile Include="DialogueProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
