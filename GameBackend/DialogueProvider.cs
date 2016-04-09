@@ -25,7 +25,7 @@ namespace GameBackend
         /// Throws an exception if a dialogue line isn't found.
         /// </summary>
         /// <param name="dialogueID">The line of dialogue to retrieve.</param>
-        /// <param name="useCache"></param>
+        /// <param name="useCache">Informs the backend to use the cache when retrieving the line, or to do it from the database.</param>
         /// <returns></returns>
         public static async Task<string> FetchAsync(int dialogueID, bool useCache)
         {
@@ -112,10 +112,13 @@ namespace GameBackend
 
         /// <summary>
         /// Inserts a new line into the database.
+        /// <para/>
+        /// Optionally, refreshes the cache from the database after a successful insert.
         /// </summary>
-        /// <param name="text"></param>
+        /// <param name="text">The dialogue text to insert.</param>
+        /// <param name="refreshCache">Instructs the backend to refresh the dialogue cache after a successful insert.</param>
         /// <returns></returns>
-        public static async Task InsertAsync(string text)
+        public static async Task InsertAsync(string text, bool refreshCache)
         {
             try
             {
@@ -145,9 +148,11 @@ namespace GameBackend
                             throw;
                         }
                     }
-
-                    
                 }
+
+                if (refreshCache)
+                    await InitializeCacheAsync();
+
             }
             catch
             {
@@ -157,11 +162,14 @@ namespace GameBackend
 
         /// <summary>
         /// Updates a line of dialogue
+        /// <para/>
+        /// Optionally, refreshes the cache.
         /// </summary>
-        /// <param name="text"></param>
-        /// <param name="id"></param>
+        /// <param name="text">The text of the dialogue to update.</param>
+        /// <param name="id">The ID of the dialogue to update.  Invalid IDs will throw an error.</param>
+        /// <param name="refreshCache">Instructs the backend to refresh the cache after the update.</param>
         /// <returns></returns>
-        public static async Task UpdateAsync(string text, int id)
+        public static async Task UpdateAsync(string text, int id, bool refreshCache)
         {
             try
             {
@@ -195,6 +203,9 @@ namespace GameBackend
                     }
                 }
 
+                if (refreshCache)
+                    await InitializeCacheAsync();
+
             }
             catch
             {
@@ -205,10 +216,13 @@ namespace GameBackend
 
         /// <summary>
         /// Deletes a line of dialogue from the database.
+        /// <para/>
+        /// Optionally refreshes the cache after the deletion.
         /// </summary>
-        /// <param name="id"></param>
+        /// <param name="id">The ID of the item to delete.</param>
+        /// <param name="refreshCache">Instructs the backend to refresh the cache after the deletion.</param>
         /// <returns></returns>
-        public static async Task DeleteAsync(int id)
+        public static async Task DeleteAsync(int id, bool refreshCache)
         {
             try
             {
@@ -241,6 +255,9 @@ namespace GameBackend
                         }
                     }
                 }
+
+                if (refreshCache)
+                    await InitializeCacheAsync();
             }
             catch
             {
