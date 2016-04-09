@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameModels", "GameModels\Ga
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameBackend", "GameBackend\GameBackend.csproj", "{137A4FE4-C982-45C5-9E87-87C9D3659D12}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Utilities", "Utilities\Utilities.csproj", "{72861EE3-790F-4F18-9328-E1028C9815B3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{137A4FE4-C982-45C5-9E87-87C9D3659D12}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{137A4FE4-C982-45C5-9E87-87C9D3659D12}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{137A4FE4-C982-45C5-9E87-87C9D3659D12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72861EE3-790F-4F18-9328-E1028C9815B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72861EE3-790F-4F18-9328-E1028C9815B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72861EE3-790F-4F18-9328-E1028C9815B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72861EE3-790F-4F18-9328-E1028C9815B3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
